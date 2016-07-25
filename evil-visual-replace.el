@@ -39,6 +39,7 @@
 
 (require 'evil)
 
+;;;###autoload
 (defun evil-virep-visual-bindings ()
   "Set up evil-visual-replace default key bindings.
 
