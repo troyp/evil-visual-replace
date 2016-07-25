@@ -18,11 +18,13 @@ the native commands, it is recommended to rebind them in `evil-visual-state-map`
 To replace the <kbd>M-%</kbd> and <kbd>C-M-%</kbd> bindings in
 `evil-visual-state-map`, simply call:
 
-```(evil-virep-visual-bindings)```
+```lisp
+(evil-virep-visual-bindings)
+```
 
 If you prefer to give the commands their own bindings, you can bind them like this:
 
-```
+```lisp
 (define-key evil-visual-state-map (kbd "C-x M-%") 'evil-virep-query-replace)
 (define-key evil-visual-state-map (kbd "C-x C-M-%") 'evil-virep-replace-regexp)
 ```
@@ -30,7 +32,7 @@ If you prefer to give the commands their own bindings, you can bind them like th
 Or to bind them with evil-leader (eg. on <kbd>leader</kbd><kbd>M-%</kbd> and
 <kbd>leader</kbd><kbd>C-M-%</kbd>):
 
-```
+```lisp
 (evil-leader/set-key
   "M-%"          'evil-virep-query-replace
   "M-C-%"        'evil-virep-replace-regexp )
