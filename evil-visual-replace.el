@@ -4,7 +4,7 @@
 
 ;; Author: Troy Pracy
 ;; Keywords: search replace regexp
-;; Version: 0.0.1
+;; Version: 0.0.2
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,11 +23,11 @@
 
 ;; Provides versions of the `query-replace' (M-%) and `replace-regexp' (C-M-%)
 ;; commands which work for evil-mode visual-state, including visual blocks
-;; (rectangular regions). The native emacs versions don't understand evil's
+;; (rectangular regions).  The native Emacs versions don't understand evil's
 ;; visual blocks, and treat them as normal regions.
 ;;
 ;; Note that these commands are specifically intended for visual state and have
-;; barely been tested in non-visual states. Rather than globally replacing
+;; barely been tested in non-visual states.  Rather than globally replacing
 ;; the native commands, it is recommended to rebind them in
 ;; `evil-visual-state-map'.
 ;;
@@ -40,6 +40,10 @@
 (require 'evil)
 
 (defun evil-virep-visual-bindings ()
+  "Set up evil-visual-replace default key bindings.
+
+Bind `evil-virep-query-replace' to M-% and `evil-virep-replace-regexp' to C-M-%
+in `evil-visual-state-map'."
   (interactive)
   (define-key evil-visual-state-map (kbd "M-%") 'evil-virep-query-replace)
   (define-key evil-visual-state-map (kbd "C-M-%") 'evil-virep-replace-regexp)
@@ -48,14 +52,17 @@
 ;;;###autoload
 (evil-define-operator evil-virep-query-replace
   (start end type fromstr tostr  &optional delimited backward)
-  "An interactive function which acts on the evil visual region.
-Replace FROMSTR with TOSTR from START to END with CHAR.
+  "Replace FROMSTR with TOSTR from START to END with CHAR.
+
 If DELIMITED is non-nil (or a prefix argument is given interactively), only
 matches surrounded by word boundaries are replaced.
+
 If BACKWARD is non-nil (or a negative prefix argument is given interactively),
 the replacement proceeds backward.
+
 This operator respects visual-block selections. For non-block visual state
 operations, it is identical to `query-replace'.
+
 For non-visual-state replacements, use `query-replace'."
   :motion evil-forward-char
   (interactive
@@ -67,8 +74,7 @@ For non-visual-state replacements, use `query-replace'."
                      (let (arg (prefix-numeric-value current-prefix-arg))
                        (cond
                         ((< arg 0) "backward")
-                        (otherwise "word"))
-                       (if (eq current-prefix-arg '-) " backward" " word"))
+                        (t         "word")))
                    "")
                  (if (and transient-mark-mode mark-active) " in region" ""))
                 nil)))
@@ -82,17 +88,18 @@ For non-visual-state replacements, use `query-replace'."
   (when fromstr
     (if (eq type 'block)
         (save-excursion
-          (defun do-replace (begcol endcol fromstr tostr)
-            (let* ((maxcol (evil-column (line-end-position)))
-                   (endcol (min endcol maxcol)))
-              (unless (> begcol maxcol)
-                (let ((begpos (evil-move-to-column begcol))
-                      (endpos (evil-move-to-column endcol)))
-                  (perform-replace fromstr tostr
-                                   t nil delimited nil nil
-                                   begpos endpos backward)))))
-          (evil-apply-on-rectangle
-           #'do-replace start end fromstr tostr))
+          (cl-flet ((do-replace
+                     (begcol endcol regexp tostr)
+                     (let* ((maxcol (evil-column (line-end-position)))
+                            (endcol (min endcol maxcol)))
+                       (unless (> begcol maxcol)
+                         (let ((begpos (evil-move-to-column begcol))
+                               (endpos (evil-move-to-column endcol)))
+                           (perform-replace fromstr tostr
+                                            t nil delimited nil nil
+                                            begpos endpos backward))))))
+            (evil-apply-on-rectangle
+             #'do-replace start end fromstr tostr)))
       :else
       (perform-replace fromstr tostr
                        t nil delimited nil nil
@@ -101,16 +108,18 @@ For non-visual-state replacements, use `query-replace'."
 ;;;###autoload
 (evil-define-operator evil-virep-replace-regexp
     (start end type regexp tostr  &optional delimited backward)
-    "An interactive function which acts on the evil visual region.
-Replace REGEXP with TOSTR from START to END with CHAR.
+    "Replace REGEXP with TOSTR from START to END with CHAR.
+
 If DELIMITED is non-nil (or a prefix argument is given interactively), only
 matches surrounded by word boundaries are replaced.
+
 If BACKWARD is non-nil (or a negative prefix argument is given interactively),
 the replacement proceeds backward.
+
 This operator respects visual-block selections. For non-block visual state
 operations, it is identical to `replace-regexp'.
-For non-visual-state replacements, use `replace-regexp'."
 
+For non-visual-state replacements, use `replace-regexp'."
     :motion evil-forward-char
     (interactive
      (let ((selection (evil-visual-range))
@@ -121,8 +130,7 @@ For non-visual-state replacements, use `replace-regexp'."
                        (let (arg (prefix-numeric-value current-prefix-arg))
                          (cond
                           ((< arg 0) "backward")
-                          (otherwise "word"))
-                         (if (eq current-prefix-arg '-) " backward" " word"))
+                          (t         "word")))
                      "")
                    (if (and transient-mark-mode mark-active) " in region" ""))
                   nil)))
@@ -136,17 +144,18 @@ For non-visual-state replacements, use `replace-regexp'."
     (when regexp
       (if (eq type 'block)
           (save-excursion
-            (defun do-replace (begcol endcol regexp tostr)
-              (let* ((maxcol (evil-column (line-end-position)))
-                     (endcol (min endcol maxcol)))
-                (unless (> begcol maxcol)
-                  (let ((begpos (evil-move-to-column begcol))
-                        (endpos (evil-move-to-column endcol)))
-                    (perform-replace regexp tostr
-                                     t t delimited nil nil
-                                     begpos endpos backward)))))
-            (evil-apply-on-rectangle
-             #'do-replace start end regexp tostr))
+            (cl-flet ((do-replace
+                       (begcol endcol regexp tostr)
+                       (let* ((maxcol (evil-column (line-end-position)))
+                              (endcol (min endcol maxcol)))
+                         (unless (> begcol maxcol)
+                           (let ((begpos (evil-move-to-column begcol))
+                                 (endpos (evil-move-to-column endcol)))
+                             (perform-replace regexp tostr
+                                              t t delimited nil nil
+                                              begpos endpos backward))))))
+              (evil-apply-on-rectangle
+               #'do-replace start end regexp tostr)))
         :else
         (perform-replace regexp tostr
                          t t delimited nil nil
