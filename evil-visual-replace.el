@@ -3,9 +3,12 @@
 ;; Copyright (C) 2016 Troy Pracy
 
 ;; Author: Troy Pracy
-;; Keywords: search replace regexp
-;; Version: 0.0.2
+;; URL: https://github.com/troyp/evil-visual-replace
+;; Version: 0.0.3
+;; Keywords: evil search replace regexp block rectangular region visual
 ;; Package-Requires: ((evil "1.0.0"))
+
+;;; License:
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
