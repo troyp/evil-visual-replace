@@ -37,25 +37,25 @@
 ;;
 ;; Install:
 ;;
-;; (evil-virep-visual-bindings)
+;; (evil-visual-replace-visual-bindings)
 
 ;;; Code:
 
 (require 'evil)
 
 ;;;###autoload
-(defun evil-virep-visual-bindings ()
+(defun evil-visual-replace-visual-bindings ()
   "Set up evil-visual-replace default key bindings.
 
-Bind `evil-virep-query-replace' to M-% and `evil-virep-replace-regexp' to C-M-%
-in `evil-visual-state-map'."
+Bind `evil-visual-replace-query-replace' to M-% and
+`evil-visual-replace-replace-regexp' to C-M-% in `evil-visual-state-map'."
   (interactive)
-  (define-key evil-visual-state-map (kbd "M-%") 'evil-virep-query-replace)
-  (define-key evil-visual-state-map (kbd "C-M-%") 'evil-virep-replace-regexp)
+  (define-key evil-visual-state-map (kbd "M-%")   'evil-visual-replace-query-replace)
+  (define-key evil-visual-state-map (kbd "C-M-%") 'evil-visual-replace-replace-regexp)
   )
 
 ;;;###autoload
-(evil-define-operator evil-virep-query-replace
+(evil-define-operator evil-visual-replace-query-replace
   (start end type fromstr tostr  &optional delimited backward)
   "Replace FROMSTR with TOSTR from START to END with CHAR.
 
@@ -111,7 +111,7 @@ For non-visual-state replacements, use `query-replace'."
                        start end backward))))
 
 ;;;###autoload
-(evil-define-operator evil-virep-replace-regexp
+(evil-define-operator evil-visual-replace-replace-regexp
     (start end type regexp tostr  &optional delimited backward)
     "Replace REGEXP with TOSTR from START to END with CHAR.
 

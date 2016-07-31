@@ -19,14 +19,14 @@ To replace the <kbd>M-%</kbd> and <kbd>C-M-%</kbd> bindings in
 `evil-visual-state-map`, simply call:
 
 ```lisp
-(evil-virep-visual-bindings)
+(evil-visual-replace-visual-bindings)
 ```
 
 If you prefer to give the commands their own bindings, you can bind them like this:
 
 ```lisp
-(define-key evil-visual-state-map (kbd "C-x M-%") 'evil-virep-query-replace)
-(define-key evil-visual-state-map (kbd "C-x C-M-%") 'evil-virep-replace-regexp)
+(define-key evil-visual-state-map (kbd "C-x M-%")   'evil-visual-replace-query-replace)
+(define-key evil-visual-state-map (kbd "C-x C-M-%") 'evil-visual-replace-replace-regexp)
 ```
 
 Or to bind them with evil-leader (eg. on <kbd>leader</kbd><kbd>M-%</kbd> and
@@ -34,6 +34,6 @@ Or to bind them with evil-leader (eg. on <kbd>leader</kbd><kbd>M-%</kbd> and
 
 ```lisp
 (evil-leader/set-key
-  "M-%"          'evil-virep-query-replace
-  "M-C-%"        'evil-virep-replace-regexp )
+  "M-%"    'evil-visual-replace-query-replace
+  "M-C-%"  'evil-visual-replace-replace-regexp )
 ```
