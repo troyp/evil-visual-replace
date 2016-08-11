@@ -13,7 +13,14 @@ Note that these commands are specifically intended for visual state and have
 barely been tested in non-visual states. Rather than globally replacing
 the native commands, it is recommended to rebind them in `evil-visual-state-map`.
 
-## Install
+## Installation
+
+Install from melpa or by placing `evil-visual-replace.el` on your `load-path` and
+executing:
+
+    (require 'evil-visual-replace)
+
+## Key Bindings
 
 To replace the <kbd>M-%</kbd> and <kbd>C-M-%</kbd> bindings in
 `evil-visual-state-map`, simply call:
@@ -37,3 +44,7 @@ Or to bind them with evil-leader (eg. on <kbd>leader</kbd><kbd>M-%</kbd> and
   "M-%"    'evil-visual-replace-query-replace
   "M-C-%"  'evil-visual-replace-replace-regexp )
 ```
+
+## License
+
+[GPL version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
