@@ -45,6 +45,11 @@ Or to bind them with evil-leader (eg. on <kbd>`<leader>`</kbd> <kbd>M-%</kbd> an
   "M-C-%"  'evil-visual-replace-replace-regexp )
 ```
 
+## Known Limitations
+
+The behaviour of <kbd>!</kbd> is different in a visual block replace. Rather than
+replacing all remaining occurrences, it only replaces those on the current line.
+
 ## License
 
 [GPL version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
