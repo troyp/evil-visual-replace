@@ -54,7 +54,6 @@ Bind `evil-visual-replace-query-replace' to M-% and
   (define-key evil-visual-state-map (kbd "C-M-%") 'evil-visual-replace-replace-regexp)
   )
 
-;;;###autoload
 (evil-define-operator evil-visual-replace-query-replace
   (start end type fromstr tostr  &optional delimited backward)
   "Replace FROMSTR with TOSTR from START to END with CHAR.
@@ -110,7 +109,6 @@ For non-visual-state replacements, use `query-replace'."
                        t nil delimited nil nil
                        start end backward))))
 
-;;;###autoload
 (evil-define-operator evil-visual-replace-replace-regexp
     (start end type regexp tostr  &optional delimited backward)
     "Replace REGEXP with TOSTR from START to END with CHAR.
