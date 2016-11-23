@@ -54,7 +54,7 @@ Bind `evil-visual-replace-query-replace' to M-% and
   (define-key evil-visual-state-map (kbd "C-M-%") 'evil-visual-replace-replace-regexp)
   )
 
-(evil-define-command evil-virep-query-replace
+(evil-define-command evil-visual-replace-query-replace
   (start end type fromstr tostr  &optional delimited backward)
   "Replace FROMSTR with TOSTR from START to END with CHAR.
 
