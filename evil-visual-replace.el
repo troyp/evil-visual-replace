@@ -54,7 +54,7 @@ Bind `evil-visual-replace-query-replace' to M-% and
   (define-key evil-visual-state-map (kbd "C-M-%") 'evil-visual-replace-replace-regexp)
   )
 
-(evil-define-operator evil-visual-replace-query-replace
+(evil-define-command evil-virep-query-replace
   (start end type fromstr tostr  &optional delimited backward)
   "Replace FROMSTR with TOSTR from START to END with CHAR.
 
@@ -68,7 +68,6 @@ This operator respects visual-block selections. For non-block visual state
 operations, it is identical to `query-replace'.
 
 For non-visual-state replacements, use `query-replace'."
-  :motion evil-forward-char
   (interactive
    (let ((selection (evil-visual-range))
          (args (query-replace-read-args
@@ -109,7 +108,7 @@ For non-visual-state replacements, use `query-replace'."
                        t nil delimited nil nil
                        start end backward))))
 
-(evil-define-operator evil-visual-replace-replace-regexp
+(evil-define-command evil-visual-replace-replace-regexp
     (start end type regexp tostr  &optional delimited backward)
     "Replace REGEXP with TOSTR from START to END with CHAR.
 
@@ -123,7 +122,6 @@ This operator respects visual-block selections. For non-block visual state
 operations, it is identical to `replace-regexp'.
 
 For non-visual-state replacements, use `replace-regexp'."
-    :motion evil-forward-char
     (interactive
      (let ((selection (evil-visual-range))
            (args (query-replace-read-args
