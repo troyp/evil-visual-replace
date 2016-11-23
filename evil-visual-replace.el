@@ -106,7 +106,9 @@ For non-visual-state replacements, use `query-replace'."
       :else
       (perform-replace fromstr tostr
                        t nil delimited nil nil
-                       start end backward))))
+                       (if (evil-visual-state-p) start (point))
+                       (if (evil-visual-state-p) end   (point-max))
+                       backward))))
 
 (evil-define-command evil-visual-replace-replace-regexp
     (start end type regexp tostr  &optional delimited backward)
@@ -160,7 +162,9 @@ For non-visual-state replacements, use `replace-regexp'."
         :else
         (perform-replace regexp tostr
                          t t delimited nil nil
-                         start end backward))))
+                         (if (evil-visual-state-p) start (point))
+                         (if (evil-visual-state-p) end   (point-max))
+                         backward))))
 
 (provide 'evil-visual-replace)
 
