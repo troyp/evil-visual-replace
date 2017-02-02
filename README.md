@@ -45,10 +45,31 @@ Or to bind them with evil-leader (eg. on <kbd>`<leader>`</kbd> <kbd>M-%</kbd> an
   "M-C-%"  'evil-visual-replace-replace-regexp )
 ```
 
+## PCRE
+
+If [pcre2el](https://github.com/joddie/pcre2el) is installed, the command
+`evil-visual-replace-pcre-query-replace` can be used instead of
+`evil-visual-replace-query-replace`. Bind it as above, for example:
+
+```lisp
+(define-key evil-visual-state-map (kbd "C-x C-M-%") 'evil-visual-replace-replace-regexp)
+```
+
+Alternatively, pass a non-nil argument to `evil-visual-replace-visual-bindings`:
+
+```lisp
+(evil-visual-replace-visual-bindings t)
+```
+
+For consistency, this will also bind <kbd>C-M-%</kbd> to
+`pcre-query-replace-regexp` for non-visual states.
+
 ## Known Limitations
 
-The behaviour of <kbd>!</kbd> is different in a visual block replace. Rather than
-replacing all remaining occurrences, it only replaces those on the current line.
+Due to the line-wise processing of visual-blocks, the behaviour of <kbd>!</kbd>
+is different in a visual block replace. Rather than replacing all remaining
+occurrences, it only replaces those on the current line. Similarly, replacements
+of newline characters will not work in visual blocks.
 
 ## License
 
