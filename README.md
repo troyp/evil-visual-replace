@@ -1,5 +1,7 @@
 # Evil Visual-Replace
 
+Search and replace within Emacs evil-mode's visual blocks (rectangle selections).
+
 [![MELPA](https://melpa.org/packages/evil-visual-replace-badge.svg)](https://melpa.org/#/evil-visual-replace)
 [![MELPA Stable](https://stable.melpa.org/packages/evil-visual-replace-badge.svg)](https://stable.melpa.org/#/evil-visual-replace)
 
