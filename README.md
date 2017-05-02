@@ -1,5 +1,8 @@
 # Evil Visual-Replace
 
+[![MELPA](https://melpa.org/packages/evil-visual-replace-badge.svg)](https://melpa.org/#/evil-visual-replace)
+[![MELPA Stable](https://stable.melpa.org/packages/evil-visual-replace-badge.svg)](https://stable.melpa.org/#/evil-visual-replace)
+
 ## Introduction
 
 The evil-visual-replace package provides versions of the emacs `query-replace`
