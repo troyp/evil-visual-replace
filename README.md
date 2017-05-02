@@ -5,6 +5,13 @@ Search and replace within Emacs evil-mode's visual blocks (rectangle selections)
 [![MELPA](https://melpa.org/packages/evil-visual-replace-badge.svg)](https://melpa.org/#/evil-visual-replace)
 [![MELPA Stable](https://stable.melpa.org/packages/evil-visual-replace-badge.svg)](https://stable.melpa.org/#/evil-visual-replace)
 
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Key Bindings](#key-bindings)
+- [PCRE](#pcre)
+- [Known Limitations](#known-limitations)
+- [License](#license)
+
 ## Introduction
 
 The evil-visual-replace package provides versions of the emacs `query-replace`
