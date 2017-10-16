@@ -1,10 +1,10 @@
 ;;; evil-visual-replace.el --- search/replace commands for evil visual state, inc. blocks
 
-;; Copyright (C) 2016 Troy Pracy
+;; Copyright (C) 2016-2017 Troy Pracy
 
 ;; Author: Troy Pracy
 ;; URL: https://github.com/troyp/evil-visual-replace
-;; Version: 0.0.4
+;; Version: 0.0.5
 ;; Keywords: evil search replace regexp block rectangular region visual
 ;; Package-Requires: ((evil "1.0.0"))
 
