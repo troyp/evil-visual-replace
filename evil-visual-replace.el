@@ -176,7 +176,7 @@ For non-visual-state replacements, use `replace-regexp'."
     (start end type regexp tostr  &optional delimited backward)
     "Replace pcre REGEXP with TOSTR from START to END with CHAR.
 
-Similar to `evil-visual-replace-query-replace', but uses PCRE regexps rather
+Similar to `evil-visual-replace-replace-regexp', but uses PCRE regexps rather
 than native elisp regexps. Requires the package pcre2el, to provide the
 function `pcre-to-elisp'.
 

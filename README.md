@@ -60,11 +60,11 @@ Or to bind them with evil-leader (eg. on <kbd>`<leader>`</kbd> <kbd>M-%</kbd> an
 ## PCRE
 
 If [pcre2el](https://github.com/joddie/pcre2el) is installed, the command
-`evil-visual-replace-pcre-query-replace` can be used instead of
-`evil-visual-replace-query-replace`. Bind it as above, for example:
+`evil-visual-replace-pcre-replace-regexp` can be used instead of
+`evil-visual-replace-replace-regexp`. Bind it as above, for example:
 
 ```lisp
-(define-key evil-visual-state-map (kbd "C-x C-M-%") 'evil-visual-replace-replace-regexp)
+(define-key evil-visual-state-map (kbd "C-x C-M-%") 'evil-visual-replace-pcre-replace-regexp)
 ```
 
 Alternatively, pass a non-nil argument to `evil-visual-replace-visual-bindings`:
