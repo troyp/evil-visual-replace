@@ -172,6 +172,8 @@ For non-visual-state replacements, use `replace-regexp'."
                          (if (evil-visual-state-p) end   (point-max))
                          backward))))
 
+(declare-function pcre-to-elisp "ext:pcre2el")
+
 (defun evil-visual-replace-pcre-replace-regexp
     (start end type regexp tostr  &optional delimited backward)
     "Replace pcre REGEXP with TOSTR from START to END with CHAR.
@@ -210,8 +212,9 @@ For non-visual-state replacements, use `replace-regexp'."
            (nth 1 args)
            (nth 2 args)
            (nth 3 args))))
-    (when regexp
-      (let ((regexp (pcre-to-elisp regexp)))
+  (when regexp
+    (require 'pcre2el)
+    (let ((regexp (pcre-to-elisp regexp)))
       (if (eq type 'block)
           (save-excursion
             (cl-flet ((do-replace
